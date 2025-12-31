@@ -1,0 +1,65 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%; /* Dark Navy/Midnight Blue */
+    --foreground: 213 31% 91%; /* Light Gray/Off-White */
+    
+    --card: 222 47% 11%; /* Same as background for a cohesive dark theme */
+    --card-foreground: 213 31% 91%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 263 70% 50%; /* Vibrant Purple */
+    --primary-foreground: 210 40% 98%; /* White for contrast on primary */
+
+    --secondary: 220 35% 18%; /* Slightly Lighter Dark Gray/Charcoal for secondary elements */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%; /* Muted dark tone */
+    --muted-foreground: 215 20.2% 65.1%; /* Muted light gray for less emphasis text */
+
+    --accent: 263 70% 50%; /* Same as primary for accents */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 70% 50%; /* Red for destructive actions */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 25.5%; /* Slightly lighter border for subtle separation */
+    --input: 217.2 32.6% 20.5%; /* Input background */
+    --ring: 263 70% 60%; /* Ring color (often for focus states) */
+
+    --radius: 0.75rem; /* Border radius for components */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1; /* Common font ligatures */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+
+  p {
+    @apply leading-relaxed text-muted-foreground;
+  }
+
+  a {
+    @apply text-primary hover:text-primary/80 transition-colors;
+  }
+}

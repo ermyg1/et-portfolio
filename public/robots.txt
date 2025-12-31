@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ermiastadesse.co.uk/sitemap.xml

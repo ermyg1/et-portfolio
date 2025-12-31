@@ -1,0 +1,38 @@
+@tailwind utilities;
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 8px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+    color: hsl(var(--primary));
+  }
+
+  /* Animation for elements to float subtly */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); } /* Reduced float height */
+    100% { transform: translateY(0px); }
+  }
+
+  .floating {
+    animation: float 5s ease-in-out infinite; /* Slightly faster animation */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
