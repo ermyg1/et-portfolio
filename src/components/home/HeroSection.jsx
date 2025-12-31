@@ -44,13 +44,15 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              {/* CONTACT — SCROLL TO CONTACT SECTION */}
               <Button asChild>
-                <a href="mailto:ermyg@hotmail.co.uk">
+                <a href="#contact">
                   <Mail className="mr-2 h-4 w-4" />
                   Contact
                 </a>
               </Button>
 
+              {/* GITHUB */}
               <Button variant="outline" asChild>
                 <a
                   href="https://github.com/ermyg1"
