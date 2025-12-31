@@ -37,7 +37,7 @@ const additionalProjects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-32">
       <div className="container mx-auto px-6 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -56,7 +56,7 @@ const ProjectsSection = () => {
                 <h3 className="text-2xl font-semibold">
                   {project.title}
                 </h3>
-                <p className="text-sm uppercase tracking-wide text-muted-foreground">
+                <p className="text-sm uppercase tracking-wide text-muted-foreground/70">
                   {project.subtitle}
                 </p>
                 <div className="space-y-4 text-muted-foreground text-lg">
