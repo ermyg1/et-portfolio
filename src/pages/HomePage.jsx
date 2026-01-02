@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import HeroSection from "@/components/home/HeroSection";
+import AboutSection from "@/components/home/AboutSection";
 import ProjectsSection from "@/components/home/ProjectsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import SkillsSection from "@/components/home/SkillsSection";
@@ -116,6 +117,7 @@ const HomePage = () => {
   return (
     <div ref={heroRef}>
       <HeroSection introText={introText} />
+      <AboutSection />
       <ProjectsSection projects={projects} />
       <TestimonialsSection testimonials={testimonials} />
       <SkillsSection skills={skills} />

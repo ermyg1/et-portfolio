@@ -1,70 +1,90 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Briefcase, Lightbulb, CalendarDays, Coffee } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import React, { useState, useRef, useEffect } from "react";
+import { Bot, X, Briefcase, Download, Mail, FolderKanban } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import profileImage from "@/assets/profile.jpg";
+import resumePdf from "@/assets/Ermias_Tadesse_CV.pdf";
+
+const EMAIL_ADDRESS = "ermyg@hotmail.co.uk";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
 
-  const initialWelcomeMessage = {
-    id: Date.now(),
-    sender: 'bot',
-    text: '👋 Hi there! I’m Ermiyas — a freelance web developer. How can I help you today?',
+  const welcomeMessage = {
+    id: "welcome",
+    sender: "bot",
+    text:
+      "Hi — I can help you quickly with my work, experience, or getting in touch. What would you like to do?",
   };
 
-  const quickReplies = [
-    { id: 'services', text: 'Learn about my services', icon: <Briefcase className="mr-2 h-4 w-4" /> },
-    { id: 'project_idea', text: 'I have a project idea', icon: <Lightbulb className="mr-2 h-4 w-4" /> },
-    { id: 'discovery_call', text: 'Book a free discovery call', icon: <CalendarDays className="mr-2 h-4 w-4" /> },
-    { id: 'browsing', text: 'Just browsing, thanks', icon: <Coffee className="mr-2 h-4 w-4" /> },
+  const actions = [
+    {
+      id: "projects",
+      label: "View projects",
+      icon: <FolderKanban className="h-4 w-4 mr-2" />,
+      action: () => {
+        document
+          .querySelector("#projects")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return "I’ve scrolled the page to show you my projects.";
+      },
+    },
+    {
+      id: "experience",
+      label: "What do you specialise in?",
+      icon: <Briefcase className="h-4 w-4 mr-2" />,
+      action: () =>
+        "I specialise in building reliable web applications, governance-aware systems, and AI-assisted tools with a strong focus on clarity and long-term maintainability.",
+    },
+    {
+      id: "cv",
+      label: "Download CV",
+      icon: <Download className="h-4 w-4 mr-2" />,
+      action: () => {
+        window.open(resumePdf, "_blank");
+        return "I’ve opened my CV in a new tab for you.";
+      },
+    },
+    {
+      id: "contact",
+      label: "Contact Ermias",
+      icon: <Mail className="h-4 w-4 mr-2" />,
+      action: () => {
+        window.open(
+          `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADDRESS}`,
+          "_blank"
+        );
+        return "I’ve opened an email draft so you can get in touch directly.";
+      },
+    },
   ];
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      setMessages([initialWelcomeMessage]);
+      setMessages([welcomeMessage]);
     }
   }, [isOpen]);
 
-  const scrollToBottom = () => {
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages]);
 
-  useEffect(scrollToBottom, [messages]);
+  const handleAction = (action) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: Date.now(), sender: "user", text: action.label },
+    ]);
 
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen && messages.length === 0) {
-      setMessages([initialWelcomeMessage]);
-    }
-  };
+    const responseText = action.action();
 
-  const handleQuickReply = (replyId) => {
-    const userMessage = quickReplies.find(qr => qr.id === replyId);
-    setMessages(prev => [...prev, { id: Date.now(), sender: 'user', text: userMessage.text }]);
-
-    let botResponseText = "";
-    switch (replyId) {
-      case 'services':
-        botResponseText = "I build modern websites, e-commerce stores, and web apps. Want to see examples?";
-        break;
-      case 'project_idea':
-        botResponseText = "Tell me what you’re thinking — business, portfolio, booking system?";
-        break;
-      case 'discovery_call':
-        botResponseText = "Drop your email and I’ll send a link to schedule a 15-min discovery call.";
-        break;
-      case 'browsing':
-        botResponseText = "Great! Feel free to explore the site or message me any time.";
-        break;
-      default:
-        botResponseText = "Sorry, I didn't understand that.";
-    }
-    
     setTimeout(() => {
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'bot', text: botResponseText }]);
-    }, 500);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, sender: "bot", text: responseText },
+      ]);
+    }, 400);
   };
 
   return (
@@ -75,57 +95,81 @@ const Chatbot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: "circOut" }}
+            transition={{ duration: 0.25 }}
             className="chatbot-window"
           >
             <div className="chatbot-header">
-              <span>Chat with Ermiyas</span>
-              <button onClick={toggleChat} aria-label="Close chat" className="hover:opacity-75 transition-opacity">
-                <X size={20} />
+              <span>Assistant</span>
+              <button onClick={() => setIsOpen(false)}>
+                <X size={18} />
               </button>
             </div>
+
             <div className="chatbot-messages">
               {messages.map((msg) => (
-                <motion.div
+                <div
                   key={msg.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`chatbot-message ${msg.sender === 'bot' ? 'bot' : 'user'}`}
+                  className={`chatbot-message-row ${
+                    msg.sender === "bot" ? "bot" : "user"
+                  }`}
                 >
-                  {msg.text}
-                </motion.div>
+                  {msg.sender === "bot" && (
+                    <img
+                      src={profileImage}
+                      alt="Ermias Tadesse"
+                      className="chatbot-avatar"
+                    />
+                  )}
+
+                  <div className={`chatbot-message ${msg.sender}`}>
+                    {msg.text}
+                  </div>
+                </div>
               ))}
               <div ref={messagesEndRef} />
             </div>
-            {messages.length > 0 && messages[messages.length - 1].sender === 'bot' && messages[messages.length - 1].id === initialWelcomeMessage.id && (
-              <div className="chatbot-quick-replies">
-                {quickReplies.map((reply) => (
-                  <Button
-                    key={reply.id}
-                    variant="outline"
-                    size="sm"
-                    className="quick-reply-button"
-                    onClick={() => handleQuickReply(reply.id)}
-                  >
-                    {reply.icon}
-                    {reply.text}
-                  </Button>
-                ))}
-              </div>
-            )}
+
+            <div className="chatbot-quick-replies">
+              {actions.map((action) => (
+                <Button
+                  key={action.id}
+                  size="sm"
+                  variant="outline"
+                  onClick={() => handleAction(action)}
+                  className="quick-reply-button"
+                >
+                  {action.icon}
+                  {action.label}
+                </Button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-      <button onClick={toggleChat} className="chatbot-icon-button" aria-label={isOpen ? "Close chat" : "Open chat"}>
+
+      <button
+        onClick={() => setIsOpen((v) => !v)}
+        className="chatbot-icon-button"
+        aria-label="Toggle chat"
+      >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div key="close" initial={{ rotate: -90, scale: 0 }} animate={{ rotate: 0, scale: 1 }} exit={{ rotate: 90, scale: 0 }} transition={{ duration: 0.2 }}>
-              <X size={30} />
+            <motion.div
+              key="close"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+            >
+              <X size={28} />
             </motion.div>
           ) : (
-            <motion.div key="open" initial={{ rotate: 90, scale: 0 }} animate={{ rotate: 0, scale: 1 }} exit={{ rotate: -90, scale: 0 }} transition={{ duration: 0.2 }}>
-              <Bot size={30} />
+            <motion.div
+              key="open"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+            >
+              <Bot size={28} />
             </motion.div>
           )}
         </AnimatePresence>

@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Github, Mail } from "lucide-react";
+import profileImage from "@/assets/profile.jpg";
 
 const HeroSection = () => {
   return (
@@ -18,7 +19,7 @@ const HeroSection = () => {
           >
             <div className="relative">
               <img
-                src="/profile.jpg"
+                src={profileImage}
                 alt="Ermias Tadesse"
                 className="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl"
               />
@@ -44,7 +45,6 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              {/* CONTACT — SCROLL TO CONTACT SECTION */}
               <Button asChild>
                 <a href="#contact">
                   <Mail className="mr-2 h-4 w-4" />
@@ -52,7 +52,6 @@ const HeroSection = () => {
                 </a>
               </Button>
 
-              {/* GITHUB */}
               <Button variant="outline" asChild>
                 <a
                   href="https://github.com/ermyg1"

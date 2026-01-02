@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Download, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import resumePdf from "@/assets/Ermias_Tadesse_CV.pdf";
 
 const EMAIL_ADDRESS = "ermyg@hotmail.co.uk";
 
@@ -39,7 +40,7 @@ const ContactSection = () => {
 
   const handleCvDownload = () => {
     trackContactEvent("contact_cv_downloaded");
-    window.open("/Ermias_Tadesse_CV.pdf", "_blank");
+    window.open(resumePdf, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -93,7 +94,7 @@ const ContactSection = () => {
             )}
           </Button>
 
-          {/* CV download */}
+          {/* CV download — Vite-managed */}
           <Button
             size="lg"
             variant="outline"

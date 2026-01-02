@@ -8,6 +8,7 @@ import {
   Award,
   Wrench as Tool,
 } from "lucide-react";
+import resumePdf from "@/assets/Ermias_Tadesse_CV.pdf";
 
 const ResumePage = () => {
   const experience = [
@@ -77,7 +78,7 @@ const ResumePage = () => {
             {/* CANONICAL CV DOWNLOAD */}
             <Button asChild className="bg-primary hover:bg-primary/90">
               <a
-                href="/Ermias_Tadesse_CV.pdf"
+                href={resumePdf}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -106,9 +107,7 @@ const ResumePage = () => {
                     <h3 className="text-xl font-semibold text-primary">
                       {job.title}
                     </h3>
-                    <p className="text-muted-foreground">
-                      {job.company}
-                    </p>
+                    <p className="text-muted-foreground">{job.company}</p>
                     <p className="text-sm text-muted-foreground mb-2">
                       {job.period}
                     </p>

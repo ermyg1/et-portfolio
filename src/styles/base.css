@@ -80,4 +80,32 @@
       0 0 0 1px rgba(139, 92, 246, 0.45),
       0 0 0 6px rgba(139, 92, 246, 0.15);
   }
+
+  /* =========================================================
+     CHATBOT — AVATAR + MESSAGE LAYOUT
+     Minimal, opt-in, non-invasive
+     ========================================================= */
+
+  .chatbot-message-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .chatbot-message-row.bot {
+    justify-content: flex-start;
+  }
+
+  .chatbot-message-row.user {
+    justify-content: flex-end;
+  }
+
+  .chatbot-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    object-fit: cover;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
 }
