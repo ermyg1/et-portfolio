@@ -25,7 +25,7 @@ const AboutSection = () => {
 
           <p>
             More recently, my work has expanded into governance-aware system
-            design — particularly around AI-assisted tools, human-in-the-loop
+            design particularly around AI-assisted tools, human-in-the-loop
             workflows, and risk-conscious architecture. I’m interested in how
             software behaves not just when it works, but when it fails.
           </p>

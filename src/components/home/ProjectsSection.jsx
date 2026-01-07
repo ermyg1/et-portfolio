@@ -7,7 +7,7 @@ const projects = [
     subtitle: "Non-Executing Governance Advisory Artefact",
     link: "https://agent.ai/agent/fjuny02x9hvqjw79",
     description: [
-      "Most AI agents prioritise autonomy and speed while ignoring governance, auditability, and human authority — creating operational and regulatory risk.",
+      "Most AI agents prioritise autonomy and speed while ignoring governance, auditability, and human authority creating operational and regulatory risk.",
       "This project demonstrates a governance-first approach to AI by design. The system is intentionally non-executing, permission-gated, and inspection-ready, with explicit architectural constraints that prevent autonomous action or external execution.",
       "It reframes capability as responsibility, showing how AI can remain useful without being uncontrolled.",
     ],
